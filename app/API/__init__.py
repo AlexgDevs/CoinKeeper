@@ -1,2 +1,1 @@
-from .database import up, migrate, drop
-from .core import app
+from .core import app, login_manager, LoginUser
