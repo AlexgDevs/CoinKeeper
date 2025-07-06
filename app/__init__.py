@@ -1,1 +1,1 @@
-from .API import app
+from .API import app, migrate, up, drop

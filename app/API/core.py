@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = '123_asd_123'
 
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
+login_manager.login_view = 'auth.g'
 login_manager.init_app(app=app)
 
 class LoginUser(UserMixin):
@@ -25,7 +25,7 @@ def load_user(user_id):
     with Session() as session:
         user = session.scalar(select(User).where(User.id == user_id))
         if user:
-            LoginUser(
+            return LoginUser(
                 id = user.id,
                 name = user.name,
                 password = user.password
