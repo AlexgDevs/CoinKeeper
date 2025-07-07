@@ -7,12 +7,14 @@ from .. import login_manager, LoginUser
 
 auth_bp = Blueprint('auth', __name__)
 
+
 #register
 @auth_bp.post('/auth/register')
 def register():
 
     if current_user.is_authenticated:
         return jsonify({'status': 'is_authenticated'}), 200
+
 
     data = request.get_json()
     name = data.get('name')
@@ -34,6 +36,7 @@ def register():
 
         login_user(login_user_obj)
         return jsonify({'statis': 'success'}), 201
+
 
 #login
 @auth_bp.post('/auth/login')
@@ -66,8 +69,10 @@ def login():
                 return jsonify({'status': 'error', 'error_type': 'uncorrected password'}), 400
         return jsonify({'status': 'error', 'error_type': 'user not found'}), 404
 
+
 #logout
 @auth_bp.get('/auth/logout')
+@login_required
 def logout():
     logout_user()
 

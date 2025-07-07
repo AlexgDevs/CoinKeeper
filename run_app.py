@@ -1,10 +1,12 @@
 from app import app, migrate, up, drop
-from app.API.routers import auth_bp, transaction_bp
+from app.API.routers import auth_bp, transaction_bp, category_bp, users_bp
 
 def reg_bp(app):
     bps = [
         auth_bp,
-        transaction_bp
+        transaction_bp,
+        category_bp,
+        users_bp
     ]
 
     for bp in bps:
@@ -12,6 +14,6 @@ def reg_bp(app):
 
 if __name__ == '__main__':
 
-    migrate()
+    # migrate()
     reg_bp(app=app)
     app.run(debug=True)
